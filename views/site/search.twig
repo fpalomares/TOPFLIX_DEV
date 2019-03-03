@@ -1,0 +1,28 @@
+<div class="container-fluid">
+
+    <div class="row"></div>
+    <div class="row">
+
+        {% for item in items %}
+
+            <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 text-center item-card">
+
+                <a class="btn-link item-link" href="{{ 'site/item?id=' ~ item.id }}">
+                    <img alt="poster"
+                         class="img-responsive poster"
+                         src="{{ 'https://images.justwatch.com' ~ item.poster|replace({'{profile}': 's592' }) }}"
+                    />
+                    <div  class="col-xs-12 info">
+                        <span class="top">{%  if (item.title|length > 25) %} {{ item.title|slice(0,25) ~ '...'}} {% else %} {{ item.title }} {% endif %}</span>
+                        <span class="bottom">{{ item.imdb_score }} - {{ item.type }}</span>
+                    </div>
+                </a>
+            </div>
+
+        {% endfor %}
+
+        <div class="col-xs-12 text-center">
+            {{  pager.widget({'pagination' : pages , 'maxButtonCount' : 6 }) | raw }}
+        </div>
+    </div>
+</div>

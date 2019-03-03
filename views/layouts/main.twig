@@ -1,0 +1,27 @@
+{{ register_asset_bundle('app/assets/AppAsset') }}  {# asset root for yii advanced template #}
+    {{ void(this.beginPage()) }}
+<!DOCTYPE html>
+<html lang="{{ app.language }}">
+    <head>
+        <meta charset="{{ app.charset }}">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ html.encode(this.title) }}</title>
+        {{ html.csrfMetaTags | raw }}
+        {{ void(this.head) }}
+    </head>
+    <body>
+        {{ void(this.beginBody()) }}
+        <section id="header" class="header-section">
+            {# header content #}
+            {{ html.img('@web/img/logo2.png',{'class':'logo-header'}) | raw }}<h2 class="text-center text-header">TOPFLIX</h2>
+        </section>
+        {{ content | raw }}
+        <footer class="">
+            <div class="container">
+                {# footer content #}
+            </div>
+        </footer>
+        {{ void(this.endBody()) }}
+    </body>
+</html>
+{{ void(this.endPage()) }}

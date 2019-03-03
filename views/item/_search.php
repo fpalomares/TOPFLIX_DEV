@@ -1,0 +1,95 @@
+<?php
+
+use app\components\SearchFunctions;
+use yii\helpers\Html;
+use yii\widgets\ActiveForm;
+
+/* @var $this yii\web\View */
+/* @var $model app\models\ItemSearch */
+/* @var $form yii\widgets\ActiveForm */
+?>
+
+    <button class="btn btn-default margin-header" id="js-open-search"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+    <div id="search" class="hidden">
+
+        <?php $form = ActiveForm::begin([
+            'action' => ['index'],
+            'method' => 'get',
+            'options' => [
+                'data-pjax' => 1
+            ],
+        ]); ?>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-3"><?= $form->field($model, 'title') ?></div>
+            <div class="col-xs-12 col-lg-4"><?= $form->field($model, 'short_description') ?></div>
+            <div class="col-xs-6 col-sm-4 col-lg-2"><?= $form->field($model, 'original_release_year')->textInput(['type' => 'number','step'=>'1','min'=>'1900','max'=>date('Y')]) ?></div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-12 col-lg-3">
+                <?php echo $form->field($model, 'type')->radioList([''=>'Todos','movie'=>'Películas','show'=>'Series'],
+                    [
+                        'item' => function($index, $label, $name, $checked, $value) {
+                            $checked_prop = ($checked) ? 'checked' : '';
+                            $return = '<label class="">';
+                            $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" '.$checked_prop.'>';
+                            $return .= '<span>' . ucwords($label) . '</span>';
+                            $return .= '</label>';
+
+                            return $return;
+                        },
+                        'class'=>'type-radio'
+                    ]
+                ) ?>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+                <div class="form-group">
+                    <?= Html::label('Proveedor de contenido') ?>
+                    <?php echo Html::radioList('provider_id',\Yii::$app->request->getQueryParam('provider_id',0),SearchFunctions::providerImages(),['encode' => false, 'class' => 'provider-radio']) ?>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-5 col-lg-2"><?php echo $form->field($model, 'imdb_score')->textInput(['type' => 'number','step'=>'0.1','max'=>'10']) ?></div>
+            <div class="col-xs-5 col-lg-2"><?php echo $form->field($model, 'filmaffinity_score')->textInput(['type' => 'number','step'=>'0.1','max'=>'10']) ?></div>
+        </div>
+
+        <?php //$form->field($model, 'description') ?>
+
+        <?php // echo $form->field($model, 'original_title') ?>
+
+        <?php // echo $form->field($model, 'original_language') ?>
+
+        <?php // echo $form->field($model, 'max_season_number') ?>
+
+        <?php // echo $form->field($model, 'poster') ?>
+
+        <?php // echo $form->field($model, 'poster_fa') ?>
+
+        <?php // echo $form->field($model, 'runtime') ?>
+
+        <?php // echo $form->field($model, 'age_certification') ?>
+
+        <?php // echo $form->field($model, 'rottentomatoes_score') ?>
+
+        <?php // echo $form->field($model, 'jw_id') ?>
+
+        <?php // echo $form->field($model, 'fa_id') ?>
+
+        <?php // echo $form->field($model, 'imdb_id') ?>
+
+        <?php // echo $form->field($model, 'extended_info')->checkbox() ?>
+
+        <?php // echo $form->field($model, 'created_dt') ?>
+
+        <?php // echo $form->field($model, 'updated_dt') ?>
+
+        <div class="form-group">
+            <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Resetear', "/item", ['class' => 'btn btn-default']) ?>
+        </div>
+
+        <?php ActiveForm::end(); ?>
+    </div>

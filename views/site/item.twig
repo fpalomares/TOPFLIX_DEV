@@ -1,0 +1,71 @@
+<div class="container-fluid">
+
+    <div class="row">
+        <div class="col-xs-12 margin-header-item">
+            <a class="btn btn-default" onclick="js:window.history.back()"><i class="glyphicon glyphicon-chevron-left"></i></a>
+        </div>
+    </div>
+
+    <div class="row margin-top-10px">
+
+        <div class="col-xs-12 item-wrapper">
+            {% if item.backdrops %}
+                {%  set image =  item.backdrops[0].url|replace({'{profile}': 's1440'}) %}
+            {% else %}
+                {%  set image = item.poster|replace({'{profile}': 's1440' ,'poster' : 'backdrop'}) %}
+            {% endif %}
+            <div class="backdrop"
+                 style="background-image: url('{{ 'https://images.justwatch.com' ~ image }}')">
+            </div>
+            {% set margin = '' %}
+            {% if item.title|length > 30 %}
+                {% set margin = 'margintop-item' %}
+            {% endif %}
+            <h3 class="title text-center {{ margin }}">{{ item.title }}</h3>
+            <div class="info-item">
+                <h5 class="">{{ html.label( t('app','Géneros') ) | raw }}  {% for item_genre in item.itemGenres %} <span class="">{{ item_genre.fkGenre.name }} | </span> {% endfor %} </h5>
+                <h5 class="">{{ html.label( t('app','Nota Imdb') ) | raw }} {{ item.imdb_score }}
+                {%  if ( item.filmaffinity_score and item.filmaffinity_score != 0.0 ) %}
+                    {{ html.label( t('app','Nota Filmaffinity') ) | raw }} {{ item.filmaffinity_score }}
+                {% endif %}
+                </h5>
+                {%  if ( item.runtime ) %}
+                    <h5 class="">{{ html.label( t('app','Runtime') ) | raw }} {{ item.runtime }} min</h5>
+                {% endif %}
+                <span class="">{{ html.label( t('app','Short Description') ) | raw }}:</span>
+                <span>{{ item.short_description }}</span>
+            </div>
+            <div class="links margin-top-5px">
+                {% if item.urlLinks %}
+                {{ html.label( t('app','Streaming') ) | raw }}
+                {% endif %}
+                {% for link in item.urlLinks %}
+                    {% if link.web and link.quality =='hd' %}
+                        <a href="{{ link.web }}" target="_blank">
+                            {{ html.img('@web/img/providers/'~ link.fk_provider ~ '.jpg',{'class':'image-provider','title':'Calidad HD'}) | raw }}
+                        </a>
+                    {% endif %}
+                    {% if link.web and link.quality =='sd' %}
+                        <a href="{{ link.web }}" target="_blank">
+                            {{ html.img('@web/img/providers/'~ link.fk_provider ~ '.jpg',{'class':'image-provider','title':'Calidad SD'}) | raw }}
+                        </a>
+                    {% endif %}
+                {% endfor %}
+            </div>
+            <div class="clips">
+                {% if item.clips %}
+                    <h5 class="">{{ html.label( t('app','Trailers') ) | raw }} </h5>
+                {% endif %}
+                {% for clip in item.clips %}
+                    {% if clip.provider == 'youtube' %}
+                        <div class="video-wrapper margin-bottom-10px">
+                            <iframe width="560" height="349" src="https://www.youtube.com/embed/{{ clip.external_id }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+    </div>
+
+</div>

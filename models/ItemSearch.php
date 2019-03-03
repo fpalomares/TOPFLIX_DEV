@@ -62,6 +62,7 @@ class ItemSearch extends item
             return $dataProvider;
         }
 
+        // providers join
         if ( $provider_id = \Yii::$app->request->get('provider_id','') ) {
 
             $query
@@ -70,6 +71,7 @@ class ItemSearch extends item
                 ->andWhere(['p.id' => $provider_id]);
         }
 
+        // genres join
         if ( $genres = \Yii::$app->request->get('genres','') ) {
 
             $query

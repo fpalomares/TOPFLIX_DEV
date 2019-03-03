@@ -67,7 +67,15 @@ class ItemSearch extends item
             $query
                 ->innerJoin('item_provider ip', 'ip.fk_item = item.id')
                 ->innerJoin('provider p', 'p.id = ip.fk_provider')
-                ->where(['p.id' => $provider_id]);
+                ->andWhere(['p.id' => $provider_id]);
+        }
+
+        if ( $genres = \Yii::$app->request->get('genres','') ) {
+
+            $query
+                ->innerJoin('item_genre ig', 'ig.fk_item = item.id')
+                ->innerJoin('genre g', 'g.id = ig.fk_genre')
+                ->andWhere(['IN','g.id', $genres]);
         }
 
         // grid filtering conditions

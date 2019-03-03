@@ -1,6 +1,8 @@
 <?php
 
 use app\components\SearchFunctions;
+use app\models\Genre;
+use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -31,7 +33,7 @@ use yii\widgets\ActiveForm;
                 <?php echo $form->field($model, 'type')->radioList([''=>'Todos','movie'=>'Películas','show'=>'Series'],
                     [
                         'item' => function($index, $label, $name, $checked, $value) {
-                            $checked_prop = ($checked) ? 'checked' : '';
+                            $checked_prop = ($checked || empty($value) ) ? 'checked' : '';
                             $return = '<label class="">';
                             $return .= '<input type="radio" name="' . $name . '" value="' . $value . '" '.$checked_prop.'>';
                             $return .= '<span>' . ucwords($label) . '</span>';
@@ -43,10 +45,29 @@ use yii\widgets\ActiveForm;
                     ]
                 ) ?>
             </div>
-            <div class="col-xs-12 col-lg-5">
+            <div class="col-xs-12 col-lg-4">
                 <div class="form-group">
                     <?= Html::label('Proveedor de contenido') ?>
                     <?php echo Html::radioList('provider_id',\Yii::$app->request->getQueryParam('provider_id',0),SearchFunctions::providerImages(),['encode' => false, 'class' => 'provider-radio']) ?>
+                </div>
+            </div>
+            <div class="col-xs-12 col-lg-5">
+                <div class="form-group">
+                    <?= Html::label('Géneros') ?>
+                    <?php echo Html::checkboxList('genres',\Yii::$app->request->getQueryParam('genres',0),ArrayHelper::map(Genre::find()->all(),'id','name'),
+                        [
+                            'encode' => false,
+                            'class' => 'genres-checkboxlist',
+                            'item' => function($index, $label, $name, $checked, $value) {
+                                $checked_prop = ($checked) ? 'checked' : '';
+                                $return = '<label class="">';
+                                $return .= '<input type="checkbox" name="' . $name . '" value="' . $value . '" '.$checked_prop.'>';
+                                $return .= '<span>' . ucwords($label) . '</span>';
+                                $return .= '</label>';
+
+                                return $return;
+                            },
+                        ]) ?>
                 </div>
             </div>
         </div>

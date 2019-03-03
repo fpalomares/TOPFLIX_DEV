@@ -293,6 +293,7 @@ a.desc:after {
     margin-bottom: 20px;
 }
 
+/** Type field **/
 .type-radio > label > input {
     display: none;
 }
@@ -311,6 +312,7 @@ a.desc:after {
     border: solid 1.5px #f00;
 }
 
+/** Provider field **/
 .provider-radio > label > input {
     display: none;
 }
@@ -324,6 +326,29 @@ a.desc:after {
 
 input[type=radio]:checked + .image-provider {
     border: solid 2px #f00;
+}
+
+/** Genres field **/
+.genres-checkboxlist {
+    line-height: 26px;
+}
+
+.genres-checkboxlist > label > input {
+    display: none;
+}
+
+.genres-checkboxlist > label > span {
+    padding:4px 5px;
+    border-radius:7px;
+    border: solid 1.5px #ccc;
+    margin-left: 5px;
+    font-weight: 500;
+    cursor: pointer;
+}
+
+.genres-checkboxlist input[type=checkbox]:checked + span {
+    font-weight: 600;
+    border: solid 1.5px #f00;
 }
 
 .btn-default:active:hover, .btn-default.active:hover,

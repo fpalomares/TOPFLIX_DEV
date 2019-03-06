@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 
 <div class="col-xs-6 col-sm-4 col-md-3 col-lg-2 text-center item-card">
 
-    <a class="btn-link item-link" href="/site/item?id=<?= $item->id ?>">
+    <a class="btn-link item-link" href="/item/item?id=<?= $item->id ?>">
         <div  class="col-xs-12 scores">
             <span class="pull-left imdb-score"><?= $item->imdb_score ?></span>
             <?php if ( !empty($item->filmaffinity_score) && $item->filmaffinity_score != 0.0 ) { ?>

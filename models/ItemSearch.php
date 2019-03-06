@@ -4,12 +4,12 @@ namespace app\models;
 
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use app\models\item;
+use app\models\Item;
 
 /**
- * ItemSearch represents the model behind the search form of `app\models\item`.
+ * ItemSearch represents the model behind the search form of `app\models\Item`.
  */
-class ItemSearch extends item
+class ItemSearch extends Item
 {
     /**
      * {@inheritdoc}
@@ -43,7 +43,7 @@ class ItemSearch extends item
     public function search($params)
     {
 
-        $query = item::find();
+        $query = Item::find();
 
         // add conditions that should always apply here
 
@@ -83,7 +83,6 @@ class ItemSearch extends item
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
-            'original_release_year' => $this->original_release_year,
             'max_season_number' => $this->max_season_number,
             'runtime' => $this->runtime,
             'rottentomatoes_score' => $this->rottentomatoes_score,
@@ -101,6 +100,7 @@ class ItemSearch extends item
             ->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'original_title', $this->original_title])
             ->andFilterWhere(['like', 'original_language', $this->original_language])
+            ->andFilterWhere(['>=', 'original_release_year', $this->original_release_year])
             ->andFilterWhere(['>=', 'imdb_score', $this->imdb_score])
             ->andFilterWhere(['>=', 'filmaffinity_score', $this->filmaffinity_score])
             ->andFilterWhere(['like', 'age_certification', $this->age_certification]);

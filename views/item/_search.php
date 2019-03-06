@@ -11,7 +11,6 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-    <button class="btn btn-default margin-header" id="js-open-search"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
     <div id="search" class="hidden">
 
         <?php $form = ActiveForm::begin([
@@ -25,7 +24,9 @@ use yii\widgets\ActiveForm;
         <div class="row">
             <div class="col-xs-12 col-lg-3"><?= $form->field($model, 'title') ?></div>
             <div class="col-xs-12 col-lg-4"><?= $form->field($model, 'short_description') ?></div>
-            <div class="col-xs-6 col-sm-4 col-lg-2"><?= $form->field($model, 'original_release_year')->textInput(['type' => 'number','step'=>'1','min'=>'1900','max'=>date('Y')]) ?></div>
+            <div class="col-xs-12 col-sm-6 col-lg-4">
+                <?= $form->field($model, 'original_release_year')->textInput(['type' => 'number','data-slider-step'=>'1','data-slider-min'=>'1940','data-slider-max'=>date('Y')]) ?>
+            </div>
         </div>
 
         <div class="row">
@@ -51,7 +52,7 @@ use yii\widgets\ActiveForm;
                     <?php echo Html::radioList('provider_id',\Yii::$app->request->getQueryParam('provider_id',0),SearchFunctions::providerImages(),['encode' => false, 'class' => 'provider-radio']) ?>
                 </div>
             </div>
-            <div class="col-xs-12 col-lg-5">
+            <div class="col-xs-10 col-lg-5">
                 <div class="form-group">
                     <?= Html::label('Géneros') ?>
                     <?php echo Html::checkboxList('genres',\Yii::$app->request->getQueryParam('genres',0),ArrayHelper::map(Genre::find()->all(),'id','name'),
@@ -73,8 +74,12 @@ use yii\widgets\ActiveForm;
         </div>
 
         <div class="row">
-            <div class="col-xs-5 col-lg-2"><?php echo $form->field($model, 'imdb_score')->textInput(['type' => 'number','step'=>'0.1','max'=>'10']) ?></div>
-            <div class="col-xs-5 col-lg-2"><?php echo $form->field($model, 'filmaffinity_score')->textInput(['type' => 'number','step'=>'0.1','max'=>'10']) ?></div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <?php echo $form->field($model, 'imdb_score')->textInput(['type' => 'number','data-slider-step'=>'0.1','data-slider-min'=>'0','data-slider-max'=>'10']) ?>
+            </div>
+            <div class="col-xs-12 col-sm-6 col-lg-3">
+                <?php echo $form->field($model, 'filmaffinity_score')->textInput(['type' => 'number','data-slider-step'=>'0.1','data-slider-min'=>'0','data-slider-max'=>'10']) ?>
+            </div>
         </div>
 
         <?php //$form->field($model, 'description') ?>
@@ -108,7 +113,7 @@ use yii\widgets\ActiveForm;
         <?php // echo $form->field($model, 'updated_dt') ?>
 
         <div class="form-group">
-            <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary']) ?>
+            <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary js-btn-search']) ?>
             <?= Html::a('Resetear', "/item", ['class' => 'btn btn-default']) ?>
         </div>
 

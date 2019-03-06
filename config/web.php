@@ -13,6 +13,7 @@ $config = [
     ],
     'layout' => 'main.twig',
     'language' => 'es-ES',
+    'defaultRoute' => 'item/',
     'components' => [
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation

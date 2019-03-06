@@ -8,12 +8,17 @@ use yii\widgets\Pjax;
 /* @var $searchModel app\models\ItemSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Items';
+$this->title = 'TOPFLIX';
 $this->params['breadcrumbs'][] = $this->title;
 \app\assets\AppAsset::register($this);
 ?>
 
-<div class="container-fluid item-index">
+<button class="btn btn-default btn-open-search" id="js-open-search"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
+<div class="container-fluid" id="js-empty-block" style="height: 80px;overflow-y: hidden">
+    &nbsp;
+</div>
+
+<div class="container-fluid item-index" id="js-item-index">
 
     <?php Pjax::begin(); ?>
     <?php echo $this->render('_search', ['model' => $searchModel]); ?>
@@ -34,8 +39,8 @@ $this->params['breadcrumbs'][] = $this->title;
             'tag' => false,
         ],
         'pager' => [
-            'firstPageLabel' => 'Primera',
-            'lastPageLabel' => 'Última',
+            'firstPageLabel' => '<<',
+            'lastPageLabel' => '>>',
             'nextPageLabel' => '>',
             'prevPageLabel' => '<',
             'maxButtonCount' => 4,

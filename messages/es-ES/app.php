@@ -15,6 +15,6 @@ return [
     'Type' => 'Tipo',
     'Runtime' => 'Duración',
     'Age Certification' => '',
-    'Imdb Score' => 'Nota Imdb (mín)',
-    'Filmaffinity Score' => 'Nota Filmaffinity (mín)',
+    'Imdb Score' => 'Nota Imdb',
+    'Filmaffinity Score' => 'Nota Filmaffinity',
 ];

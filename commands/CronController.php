@@ -280,6 +280,69 @@ class CronController extends Controller
         return ExitCode::OK;
     }
 
+    public function actionGetstreaming( $section = '') {
+
+
+        $transaction = Yii::$app->db->beginTransaction();
+
+        try {
+
+            $items = Item::find()
+                //->where('extended_info is NULL OR extended_info <> 1')
+                ->where(['type'=>'show'])
+                //->limit(150)
+                ->all();
+
+            /** @var Item $item */
+            foreach ($items as $item) {
+
+                $url = "https://apis.justwatch.com/content/titles/" . $item->type . "/" . $item->jw_id . "/locale/es_ES";
+
+                $json_data = file_get_contents($url);
+                $data = Json::decode($json_data);
+
+
+                // offers (url's for movies only)
+                if ( !empty($data['offers']) ) {
+
+                    $offers = $data['offers'];
+
+                    foreach ($offers as $offer) {
+
+                        if (
+                            $offer['monetization_type'] == "flatrate" &&
+                            !empty($offer['urls']) &&
+                            !empty(provider_id[$offer['provider_id']])
+                        ) {
+
+                            $url = new UrlLink();
+                            $url->fk_item = $item->id;
+                            $url->fk_provider = provider_id[$offer['provider_id']];
+                            $url->quality = $offer['presentation_type'];
+                            $url->web = ($offer['urls']['standard_web']) ?? '';
+                            $url->android = ($offer['urls']['deeplink_android']) ?? '';
+                            $url->ios = ($offer['urls']['deeplink_ios']) ?? '';
+
+                            $url->save();
+                            print_r($item->title);echo "\n";
+                        }
+                    }
+                }
+
+                //sleep(2);
+            }
+
+
+            $transaction->commit();
+
+        } catch ( \Exception $e ) {
+            $transaction->rollBack();
+            print_r($e->getMessage());echo "\n";
+        }
+
+        return ExitCode::OK;
+    }
+
     public function actionGetdata() {
 
         //"mvs","nfx","prv","hbo"

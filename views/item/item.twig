@@ -1,15 +1,12 @@
 {{ set(this,'title',item.title) }}
+
+<a class="btn btn-default btn-item-back" onclick="js:window.history.back()"><i class="glyphicon glyphicon-chevron-left"></i></a>
+
 <div class="container-fluid">
 
-    <div class="row">
-        <div class="col-xs-12 margin-header-item">
-            <a class="btn btn-default" onclick="js:window.history.back()"><i class="glyphicon glyphicon-chevron-left"></i></a>
-        </div>
-    </div>
+    <div class="row item-wrapper">
 
-    <div class="row margin-top-10px">
-
-        <div class="col-xs-12 item-wrapper">
+        <div class="col-xs-12">
             {% if item.backdrops %}
                 {%  set image =  item.backdrops[0].url|replace({'{profile}': 's1440'}) %}
             {% else %}

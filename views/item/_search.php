@@ -1,7 +1,9 @@
 <?php
 
+use app\components\LanguageFunctions;
 use app\components\SearchFunctions;
 use app\models\Genre;
+use app\models\Item;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
@@ -79,6 +81,9 @@ use yii\widgets\ActiveForm;
             </div>
             <div class="col-xs-12 col-sm-6 col-lg-3">
                 <?php echo $form->field($model, 'filmaffinity_score')->textInput(['type' => 'number','data-slider-step'=>'0.1','data-slider-min'=>'0','data-slider-max'=>'10']) ?>
+            </div>
+            <div class="col-xs-8 col-sm-6 col-lg-3">
+                <?php echo $form->field($model, 'original_language')->dropDownList(LanguageFunctions::getLanguages()) ?>
             </div>
         </div>
 

@@ -17,4 +17,5 @@ return [
     'Age Certification' => '',
     'Imdb Score' => 'Nota Imdb',
     'Filmaffinity Score' => 'Nota Filmaffinity',
+    'Original Language' => 'Lengua Original'
 ];

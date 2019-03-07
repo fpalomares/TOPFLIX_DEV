@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <button class="btn btn-default btn-open-search" id="js-open-search"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
-<div class="container-fluid" id="js-empty-block" style="height: 80px;overflow-y: hidden">
+<div class="container-fluid" id="js-empty-block" style="height: 80px;">
     &nbsp;
 </div>
 
@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'options' => [
             'tag' => 'div',
-            'class' => 'list-wrapper row',
+            'class' => 'list-wrapper row margin-bottom-20px',
             'id' => 'list-wrapper',
         ],
         'layout' => "<div class='col-xs-12'>{summary}</div>\n{items}\n<div class='col-xs-12 text-center'>{pager}</div>",

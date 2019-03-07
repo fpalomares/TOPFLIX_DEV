@@ -34,22 +34,32 @@
                 <span class="">{{ html.label( t('app','Short Description') ) | raw }}:</span>
                 <span>{{ item.short_description }}</span>
             </div>
-            <div class="links margin-top-5px">
+            <div class="links margin-top-5px margin-bottom-10px">
                 {% if item.urlLinks %}
-                {{ html.label( t('app','Streaming') ) | raw }}
+                    {{ html.label( t('app','Disponibilidad') ) | raw }}
+                    {% set links_hd = item.getUrlLinks().where({'quality':'hd'}).all() %}
+                    {% if links_hd %}
+                    {% endif %}
+                    {% set links_sd = item.getUrlLinks().where({'quality':'sd'}).all() %}
+                    {% if links_sd %}
+                    {% endif %}
+                    {% if links_hd %}
+                        {% for link in links_hd %}
+                                <a href="{{ link.web }}" target="_blank">
+                                    {{ html.img('@web/img/providers/'~ link.fk_provider ~ '.jpg',{'class':'image-provider','title':'Calidad HD'}) | raw }}
+                                </a>
+                        {% endfor %}
+                    {% endif %}
+                    {% if links_sd %}
+                        {% for link in links_sd %}
+                            {% if not item.getUrlLinks().where({'fk_provider':link.fk_provider,'quality':'hd'}).one() %}
+                                <a href="{{ link.web }}" target="_blank">
+                                    {{ html.img('@web/img/providers/'~ link.fk_provider ~ '.jpg',{'class':'image-provider','title':'Calidad SD'}) | raw }}
+                                </a>
+                            {% endif %}
+                        {% endfor %}
+                    {% endif %}
                 {% endif %}
-                {% for link in item.urlLinks %}
-                    {% if link.web and link.quality =='hd' %}
-                        <a href="{{ link.web }}" target="_blank">
-                            {{ html.img('@web/img/providers/'~ link.fk_provider ~ '.jpg',{'class':'image-provider','title':'Calidad HD'}) | raw }}
-                        </a>
-                    {% endif %}
-                    {% if link.web and link.quality =='sd' %}
-                        <a href="{{ link.web }}" target="_blank">
-                            {{ html.img('@web/img/providers/'~ link.fk_provider ~ '.jpg',{'class':'image-provider','title':'Calidad SD'}) | raw }}
-                        </a>
-                    {% endif %}
-                {% endfor %}
             </div>
             <div class="clips">
                 {% if item.clips %}

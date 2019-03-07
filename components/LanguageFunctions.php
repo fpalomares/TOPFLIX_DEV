@@ -159,7 +159,7 @@ const codes = [
     'so' => 'Somali',
     'st' => 'Sotho, Southern',
     'nr' => 'South Ndebele',
-    'es' => 'Spanish, Castilian',
+    'es' => 'Spanish',
     'su' => 'Sundanese',
     'sw' => 'Swahili',
     'ss' => 'Swati',
@@ -203,7 +203,7 @@ class LanguageFunctions
     public static function getLanguages() {
 
         $langs[''] = 'Todas';
-        $lang_codes = ArrayHelper::map(Item::find()->all(),'original_language','original_language');
+        $lang_codes = ArrayHelper::map(Item::find()->orderBy('original_language ASC')->all(),'original_language','original_language');
 
         foreach ($lang_codes as $lang_code) {
             if (!empty($lang_code)) {

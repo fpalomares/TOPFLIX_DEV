@@ -16,10 +16,8 @@
             {{ html.img('@web/img/logo2.png',{'class':'logo-header'}) | raw }}<h2 class="text-center text-header">TOPFLIX</h2>
         </section>
         {{ content | raw }}
-        <footer class="">
-            <div class="container">
-                {# footer content #}
-            </div>
+        <footer class="footer">
+            {{ "now"|date("Y") }} Powered by Francisco Palomares
         </footer>
         {{ void(this.endBody()) }}
     </body>

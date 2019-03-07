@@ -46,6 +46,7 @@ body {
 
 .item-index {
     overflow-y: auto;
+    min-height: 613px;
 }
 
 .item-card {
@@ -134,6 +135,12 @@ body {
 
 .scores span.imdb-score {
     background-color: rgba(245, 197, 24, 0.85);
+}
+
+.footer {
+    color: rgba(0,0,0,.7);
+    text-shadow: 0 1px rgba(255, 255, 255, 0.1);
+    text-align: center;
 }
 
 .backdrop {

@@ -28,7 +28,7 @@ $this->params['breadcrumbs'][] = $this->title;
         'dataProvider' => $dataProvider,
         'options' => [
             'tag' => 'div',
-            'class' => 'list-wrapper row margin-bottom-20px',
+            'class' => 'list-wrapper row',
             'id' => 'list-wrapper',
         ],
         'layout' => "<div class='col-xs-12'>{summary}</div>\n{items}\n<div class='col-xs-12 text-center'>{pager}</div>",

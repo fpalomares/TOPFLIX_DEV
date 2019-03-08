@@ -540,4 +540,22 @@ class CronController extends Controller
 
         return ExitCode::OK;
     }
+
+    public function actionDownloadimages() {
+
+
+        $items = Item::find()
+            ->where('id > 1391')
+            ->all();
+
+        /** @var Item $item */
+        foreach ($items as $item) {
+            if ($item->poster) {
+                print_r($item->title);echo "\n";
+                $url_img = "https://images.justwatch.com". str_replace('{profile}','s592',$item->poster);
+                copy($url_img, 'web/img/posters/'.$item->id.'.jpg');
+            }
+        }
+
+    }
 }

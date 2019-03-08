@@ -20,7 +20,7 @@ use yii\widgets\ActiveForm;
         </div>
         <img alt="poster"
              class="img-responsive poster"
-             src="https://images.justwatch.com<?= str_replace('{profile}','s592',$item->poster) ?>"
+             src="/img/posters/<?=$item->id?>.jpg"
         />
         <?php $margintop = (strlen($item->title) > 30 ) ? 'margintop-info' : ''; ?>
         <div  class="col-xs-12 info <?= $margintop ?>">

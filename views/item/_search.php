@@ -120,6 +120,7 @@ use yii\widgets\ActiveForm;
         <div class="form-group">
             <?= Html::submitButton('Buscar', ['class' => 'btn btn-primary js-btn-search']) ?>
             <?= Html::a('Resetear', "/item", ['class' => 'btn btn-default']) ?>
+            <span class="text-credits">2019. Created by F. Palomares</span>
         </div>
 
         <?php ActiveForm::end(); ?>

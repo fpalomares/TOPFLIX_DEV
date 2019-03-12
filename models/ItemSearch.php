@@ -100,10 +100,16 @@ class ItemSearch extends Item
             ->andFilterWhere(['like', 'type', $this->type])
             ->andFilterWhere(['like', 'original_title', $this->original_title])
             ->andFilterWhere(['like', 'original_language', $this->original_language])
-            ->andFilterWhere(['>=', 'original_release_year', $this->original_release_year])
             ->andFilterWhere(['>=', 'imdb_score', $this->imdb_score])
             ->andFilterWhere(['>=', 'filmaffinity_score', $this->filmaffinity_score])
             ->andFilterWhere(['like', 'age_certification', $this->age_certification]);
+
+        if ( $this->original_release_year ) {
+            $years_range = explode(",",$this->original_release_year);
+            $query
+                ->andFilterWhere(['>=', 'original_release_year', $years_range[0]])
+                ->andFilterWhere(['<=', 'original_release_year', $years_range[1]]);
+        }
 
         // only with image (poster)
         $query->andWhere(['not',['poster' => null]]);

@@ -1,7 +1,10 @@
-html,
-body {
+html, body {
     height: 100%;
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/
+    background: #E9E9E9;
+}
+body.app-item-item {
+    background-color: #fff !important;
 }
 ::-webkit-scrollbar {
     display: none;
@@ -43,6 +46,11 @@ body {
     left: 15px;
 }
 
+.btn-open-search i {
+    margin-top: -3px;
+    vertical-align: middle;
+}
+
 .text-credits {
     font-size: 60%;
     font-style: italic;
@@ -52,7 +60,19 @@ body {
     color: #6c6c6c;
 }
 
+#search {
+    padding-top: 52px;
+    background-color: #fff;
+}
+
+.summary {
+    margin-top: 8px;
+    margin-bottom: -7px;
+}
+
 .item-index {
+    padding-top:70px;
+    background-color: #E9E9E9;
 }
 
 .item-card {
@@ -84,12 +104,11 @@ body {
 
 .item-card .item-link .info {
 
-    padding: 0;
+    padding: 0 15px 0 25px;
     height: 38px;
     line-height: 38px;
     text-align: left;
     margin-top: -80px;
-    padding-left: 10px;
 }
 
 .margintop-info {
@@ -121,8 +140,8 @@ body {
     color: #fff;
     height: 30px;
     line-height: 30px;
-    padding-left: 5px;
-    padding-right: 30px;
+    padding-left: 20px;
+    padding-right: 15px;
     position: absolute;
     top: 10px;
     z-index: 1100;
@@ -321,7 +340,9 @@ input[type=radio]:checked + .image-provider {
 
 
 /***** SLIDERS ****/
-.slider-track-high {
+
+.field-itemsearch-imdb_score .slider-track-high,
+.field-itemsearch-filmaffinity_score .slider-track-high {
     background: #BABABA;
     background-image: -webkit-linear-gradient(top, #F5C518 0%, #f3ce00 100%);
     background-image: -o-linear-gradient(top, #F5C518 0%, #f3ce00 100%);
@@ -333,8 +354,20 @@ input[type=radio]:checked + .image-provider {
 
 }
 
-.slider-selection {
+.field-itemsearch-imdb_score .slider-selection,
+.field-itemsearch-filmaffinity_score .slider-selection {
     background: transparent;
+}
+
+.field-itemsearch-original_release_year .slider-selection {
+    background: #BABABA;
+    background-image: -webkit-linear-gradient(top, #F5C518 0%, #f3ce00 100%);
+    background-image: -o-linear-gradient(top, #F5C518 0%, #f3ce00 100%);
+    background-image: linear-gradient(to bottom, #F5C518 0%, #f3ce00 100%);
+    background-repeat: repeat-x;
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffF5C518', endColorstr='#fff3ce00', GradientType=0);
+    -webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.15);
 }
 
 .slider.slider-horizontal .slider-tick, .slider.slider-horizontal .slider-handle {
@@ -345,6 +378,14 @@ input[type=radio]:checked + .image-provider {
     width: 100%;
     height: 20px;
     margin-left: 4px;
+}
+
+.slider-handle.max-slider-handle {
+    margin-left: -15px !important;
+}
+
+.tooltip.tooltip-max.top {
+    left: 95% !important;
 }
 
 
@@ -379,7 +420,33 @@ input[type=radio]:checked + .image-provider {
 
 
 @media (max-width: 576px) {
+    .header-section {
+        height: 50px;
+    }
+    .text-header {
+        margin-top: 11px !important;
+        font-size: 26px !important;
+        margin-left: 2px;
+    }
+    .btn-open-search, .btn-item-back {
+        top: 10px;
+        padding: 4px 10px;
+    }
+    #search {
+        padding-top: 52px;
+    }
+    .item-index {
+        padding-top:52px;
+    }
+    .summary {
+        font-size: 11px;
+        margin-bottom: -8px;
+        margin-top: 3px;
+    }
 
+    .item-wrapper {
+        margin-top: 50px;
+    }
 }
 
 @media(max-width:768px){

@@ -13,7 +13,7 @@ use yii\widgets\ActiveForm;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-    <div id="search" class="hidden">
+    <div id="search" class="container-fluid hidden">
 
         <?php $form = ActiveForm::begin([
             'action' => ['index'],
@@ -27,7 +27,11 @@ use yii\widgets\ActiveForm;
             <div class="col-xs-12 col-lg-3"><?= $form->field($model, 'title') ?></div>
             <div class="col-xs-12 col-lg-4"><?= $form->field($model, 'short_description') ?></div>
             <div class="col-xs-12 col-sm-6 col-lg-4">
-                <?= $form->field($model, 'original_release_year')->textInput(['type' => 'number','data-slider-step'=>'1','data-slider-min'=>'1940','data-slider-max'=>date('Y')]) ?>
+                <?php // echo $form->field($model, 'original_release_year')->textInput(['class'=>'js-range-year','type' => 'text','data-slider-step'=>'1','data-slider-min'=>'1940','data-slider-max'=>date('Y')]) ?>
+                <div class="form-group field-itemsearch-original_release_year">
+                    <label class="control-label" for="itemsearch-original_release_year">Año de estreno</label>
+                    <input type="text" id="itemsearch-original_release_year" class="" name="ItemSearch[original_release_year]" value="<?= $model->original_release_year ?? '1940,'.date('Y') ?>" data-slider-step="1" data-slider-min="1940" data-slider-max="<?=date('Y')?>" data-value="">
+                </div>
             </div>
         </div>
 

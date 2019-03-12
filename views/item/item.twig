@@ -31,7 +31,7 @@
                     <h5 class="">{{ html.label( t('app','Runtime') ) | raw }} {{ item.runtime }} min</h5>
                 {% endif %}
                 <h5 class="">{{ html.label( t('app','Original Release Year') ) | raw }} {{ item.original_release_year }}</h5>
-                <span class="">{{ html.label( t('app','Short Description') ) | raw }}:</span>
+                <span class="">{{ html.label( t('app','Short Description'),'',{'style':'margin-bottom:0px'} ) | raw }}:</span>
                 <span>{{ item.short_description }}</span>
             </div>
             <div class="links margin-top-5px margin-bottom-10px">

@@ -70,6 +70,12 @@ $config = [
                     ],
                     'functions' => array(
                         't' => 'Yii::t',
+                        'dump' => function($var){
+                            return print_r($var);
+                        },
+                        'file_exists' => function($file) {
+                            return file_exists($file);
+                        }
                     ),
                     'uses' => ['yii\bootstrap'],
                 ],

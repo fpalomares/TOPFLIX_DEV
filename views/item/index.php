@@ -14,15 +14,11 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 
 <button class="btn btn-default btn-open-search" id="js-open-search"><i class="glyphicon glyphicon-menu-hamburger"></i></button>
-<div class="container-fluid" id="js-empty-block" style="height: 80px;">
-    &nbsp;
-</div>
+
+<?php Pjax::begin(['timeout'=>5000]); ?>
+<?php echo $this->render('_search', ['model' => $searchModel]); ?>
 
 <div class="container-fluid item-index" id="js-item-index">
-
-    <?php Pjax::begin(); ?>
-    <?php echo $this->render('_search', ['model' => $searchModel]); ?>
-
 
     <?= ListView::widget([
         'dataProvider' => $dataProvider,

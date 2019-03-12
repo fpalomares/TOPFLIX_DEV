@@ -9,7 +9,7 @@
         {{ html.csrfMetaTags | raw }}
         {{ void(this.head) }}
     </head>
-    <body>
+    <body class="app-{{ app.controller.id }}-{{ app.controller.action.id }}">
         {{ void(this.beginBody()) }}
         <section id="header" class="header-section">
             {# header content #}

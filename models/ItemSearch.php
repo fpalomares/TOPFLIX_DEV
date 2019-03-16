@@ -80,6 +80,27 @@ class ItemSearch extends Item
                 ->andWhere(['IN','g.id', $genres]);
         }
 
+        // person  joins
+        if ( $actor_id = \Yii::$app->request->get('actor_id','') ) {
+
+            $query
+                ->innerJoin('credit c', 'c.fk_item = item.id')
+                ->innerJoin('person', 'person.id = c.fk_person')
+                ->andWhere(['person.id' => $actor_id])
+                ->andWhere(['c.role' => 'ACTOR']);
+        }
+
+        if (  $director_id = \Yii::$app->request->get('director_id','') ) {
+
+            $query
+                ->innerJoin('credit c', 'c.fk_item = item.id')
+                ->innerJoin('person', 'person.id = c.fk_person')
+                ->andWhere(['person.id' => $director_id])
+                ->andWhere(['c.role' => 'DIRECTOR']);
+        }
+
+
+
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,

@@ -77,4 +77,8 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); */ ?>
     <?php Pjax::end(); ?>
+
+    <div class="text-center">
+        <iframe src="https://rcm-eu.amazon-adsystem.com/e/cm?o=30&p=12&l=ur1&category=electronica&banner=046J26ETS9M7NDGDASG2&f=ifr&linkID=ca89e308b39764d8c6775bcd92fe5a18&t=bballislife-21&tracking_id=bballislife-21" width="300" height="250" scrolling="no" border="0" marginwidth="0" style="border:none;" frameborder="0"></iframe>
+    </div>
 </div>

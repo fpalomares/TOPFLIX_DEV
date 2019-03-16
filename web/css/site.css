@@ -1,4 +1,5 @@
-html, body {
+html {}
+body {
     height: 100%;
     /*overflow-x: hidden;*/
     background: #E9E9E9;
@@ -61,7 +62,7 @@ body.app-item-item {
 }
 
 #search {
-    padding-top: 52px;
+    padding-top: 70px;
     background-color: #fff;
 }
 
@@ -401,6 +402,35 @@ input[type=radio]:checked + .image-provider {
 .item-wrapper .info-item {
     text-align: left;
     margin-top: 25px;
+}
+
+.info-item h5 {
+    margin: 7px 0;
+    display: block;
+}
+
+.item-section {
+    margin-top: 5px;
+    margin-bottom: 10px;
+}
+
+.item-label {
+    display: block;
+}
+
+.item-genre {
+    display: inline-block;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 2px 4px;
+}
+
+.item-credit {
+    display: block;
+    border-radius: 3px;
+    border: 1px solid #ccc;
+    padding: 3px 4px;
+    margin-top: 4px;
 }
 
 .video-wrapper {

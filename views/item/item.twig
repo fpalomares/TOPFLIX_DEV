@@ -7,49 +7,95 @@
     <div class="row item-wrapper">
 
         <div class="col-xs-12">
+
             {% if item.backdrops %}
                 {%  set image =  item.backdrops[0].url|replace({'{profile}': 's1440'}) %}
             {% else %}
                 {%  set image = item.poster|replace({'{profile}': 's1440' ,'poster' : 'backdrop'}) %}
             {% endif %}
+
             <div class="backdrop"
                  style="background-image: url('{{ 'https://images.justwatch.com' ~ image }}')">
             </div>
+
             {% set margin = '' %}
+
             {% if item.title|length > 30 %}
                 {% set margin = 'margintop-item' %}
             {% endif %}
+
             <h3 class="title text-center {{ margin }}">{{ item.title }}</h3>
+
             <div class="info-item">
-                <h5 class="">{{ html.label( t('app','Géneros') ) | raw }}  {% for item_genre in item.itemGenres %} <span class="">{{ item_genre.fkGenre.name }} | </span> {% endfor %} </h5>
-                <h5 class="">{{ html.label( t('app','Nota Imdb') ) | raw }} {{ item.imdb_score }}
-                {%  if ( item.filmaffinity_score and item.filmaffinity_score != 0.0 ) %}
-                    {{ html.label( t('app','Nota Filmaffinity') ) | raw }} {{ item.filmaffinity_score }}
-                {% endif %}
+
+                <h5 class="">{{ html.label( t('app','Nota IMDb') ) | raw }} {{ item.imdb_score }}
+                    {%  if ( item.filmaffinity_score and item.filmaffinity_score != 0.0 ) %}
+                        {{ html.label( t('app','Nota Filmaffinity') ) | raw }} {{ item.filmaffinity_score }}
+                    {% endif %}
                 </h5>
+
                 {%  if ( item.runtime ) %}
                     <h5 class="">{{ html.label( t('app','Runtime') ) | raw }} {{ item.runtime }} min</h5>
                 {% endif %}
+
                 <h5 class="">{{ html.label( t('app','Original Release Year') ) | raw }} {{ item.original_release_year }}</h5>
-                <span class="">{{ html.label( t('app','Short Description'),'',{'style':'margin-bottom:0px'} ) | raw }}:</span>
-                <span>{{ item.short_description }}</span>
+
+
+                {% if item.original_title and item.title != item.original_title %}
+                    <h5 class="">{{ html.label( t('app','Título Original') ) | raw }} {{ item.original_title }}</h5>
+                {% endif %}
+
+                <div class="item-section">
+                    {{ html.label( t('app','Short Description'),'',{'class':'item-label'} ) | raw }}
+                    <span>{{ item.short_description }}</span>
+                </div>
+
+                <div class="item-section">
+                    {{ html.label( t('app','Géneros') ,'',{'class':'item-label'}) | raw }}
+                    {% for item_genre in item.itemGenres %}
+                        <span class="item-genre">{{ item_genre.fkGenre.name }}</span>
+                    {% endfor %}
+                </div>
+
+                {% set directors = item.getCredits().andWhere({'role':'DIRECTOR'}).all() %}
+                {% if directors %}
+                    <div class="item-section">
+                        {{ html.label( t('app','Director'),'',{'class':'item-label'}) | raw }}
+                        {% for director in directors %}
+                            <a href="/item?director_id={{ director.fk_person }}" style="color: inherit;text-decoration: none;">
+                                <span class="item-credit">{{ director.name }}</span>
+                            </a>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+
+                <div class="item-section">
+                    {{ html.label( t('app','Reparto'),'',{'class':'item-label'}) | raw }}
+                    {% for credit in item.getCredits().andWhere({'role':'ACTOR'}).limit(7).all() %}
+                        <a href="/item?actor_id={{ credit.fk_person }}" style="color: inherit;text-decoration: none;">
+                            <span class="item-credit">{{ credit.name }} {% if credit.character_name %}({{ credit.character_name }}) {% endif %}</span>
+                        </a>
+                    {% endfor %}
+                </div>
             </div>
+
             <div class="links margin-top-5px margin-bottom-10px">
+
                 {% if item.urlLinks %}
+
                     {{ html.label( t('app','Disponibilidad') ) | raw }}
+
                     {% set links_hd = item.getUrlLinks().where({'quality':'hd'}).all() %}
-                    {% if links_hd %}
-                    {% endif %}
                     {% set links_sd = item.getUrlLinks().where({'quality':'sd'}).all() %}
-                    {% if links_sd %}
-                    {% endif %}
+
                     {% if links_hd %}
                         {% for link in links_hd %}
-                                <a href="{{ link.web }}" target="_blank">
-                                    {{ html.img('@web/img/providers/'~ link.fk_provider ~ '.jpg',{'class':'image-provider','title':'Calidad HD'}) | raw }}
-                                </a>
+                            <a href="{{ link.web }}" target="_blank">
+                                {{ html.img('@web/img/providers/'~ link.fk_provider ~ '.jpg',{'class':'image-provider','title':'Calidad HD'}) | raw }}
+                            </a>
                         {% endfor %}
                     {% endif %}
+
                     {% if links_sd %}
                         {% for link in links_sd %}
                             {% if not item.getUrlLinks().where({'fk_provider':link.fk_provider,'quality':'hd'}).one() %}
@@ -59,12 +105,15 @@
                             {% endif %}
                         {% endfor %}
                     {% endif %}
+
                 {% endif %}
             </div>
+
             <div class="clips">
                 {% if item.clips %}
                     <h5 class="">{{ html.label( t('app','Trailers') ) | raw }} </h5>
                 {% endif %}
+
                 {% for clip in item.clips %}
                     {% if clip.provider == 'youtube' %}
                         <div class="video-wrapper margin-bottom-10px">
@@ -74,7 +123,5 @@
                 {% endfor %}
             </div>
         </div>
-
     </div>
-
 </div>

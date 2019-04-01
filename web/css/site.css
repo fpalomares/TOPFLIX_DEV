@@ -66,6 +66,14 @@ body.app-item-item {
     background-color: #fff;
 }
 
+.filter-person-wrapper {
+    margin-bottom: -28px
+}
+
+.filter-person-wrapper .filter-person-text {
+    padding-top: 8px;
+}
+
 .summary {
     margin-top: 8px;
     margin-bottom: -7px;
@@ -394,6 +402,20 @@ input[type=radio]:checked + .image-provider {
 .item-wrapper {
     margin-top: 70px;
 }
+
+.carousel-control {
+    line-height: 320px;
+    width: 10%;
+}
+
+.carousel-indicators {
+    top: 10px;
+}
+
+.carousel-inner > .item {
+    z-index: -1;
+}
+
 .item-wrapper .title {
     color: #fff;
     margin-top: -35px;
@@ -468,6 +490,16 @@ input[type=radio]:checked + .image-provider {
     .item-index {
         padding-top:52px;
     }
+
+    .filter-person-wrapper {
+        margin-bottom: -20px
+    }
+
+    .filter-person-wrapper .filter-person-text {
+        font-size: 11px;
+        padding-top: 3px;
+    }
+
     .summary {
         font-size: 11px;
         margin-bottom: -8px;
@@ -521,6 +553,15 @@ input[type=radio]:checked + .image-provider {
 
     .backdrop {
         height: 280px;
+    }
+
+    .carousel-control {
+        line-height: 280px;
+        width: 8%;
+    }
+
+    .carousel-indicators {
+        top: 12px;
     }
 
 }

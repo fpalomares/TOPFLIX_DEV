@@ -20,6 +20,15 @@ $this->params['breadcrumbs'][] = $this->title;
 
 <div class="container-fluid item-index" id="js-item-index">
 
+    <?php
+    $person_id = \Yii::$app->request->get('actor_id') ?? \Yii::$app->request->get('director_id','');
+    if ( $person_id) { ?>
+        <div class="row">
+            <div class="col-xs-12 filter-person-wrapper">
+                <span class="pull-right filter-person-text">Buscas por <b><?php echo \app\models\Person::findOne($person_id)->name; ?></i></b></span>
+            </div>
+        </div>
+    <?php }?>
     <?= ListView::widget([
         'dataProvider' => $dataProvider,
         'options' => [

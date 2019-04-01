@@ -90,7 +90,7 @@ class ItemSearch extends Item
                 ->andWhere(['c.role' => 'ACTOR']);
         }
 
-        if (  $director_id = \Yii::$app->request->get('director_id','') ) {
+        if ( $director_id = \Yii::$app->request->get('director_id','') ) {
 
             $query
                 ->innerJoin('credit c', 'c.fk_item = item.id')

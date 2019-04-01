@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Backdrop;
 use Yii;
 use app\models\Item;
 use app\models\ItemSearch;
@@ -75,8 +76,17 @@ class ItemController extends Controller
             throw new NotFoundHttpException("Item not found");
         }
 
+        $item_backdrops = [];
+
+        /** @var Backdrop $backdrop */
+        foreach ($item->backdrops as $backdrop) {
+            $img=  'https://images.justwatch.com' . str_replace('{profile}', 's1440',$backdrop->url);
+            $item_backdrops[] = "<div class='backdrop' style='background-image: url( ". $img  ." )'></div>";
+        }
+
         return $this->render('item.twig', [
-            'item' => $item
+            'item'              => $item,
+            'item_backdrops'    => $item_backdrops
         ]);
     }
 
